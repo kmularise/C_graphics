@@ -1,4 +1,11 @@
 # so long
+## 문제조건
+|항목|조건|
+|------|---|
+|Program name|so_long|
+|Turn in files|Makefile, *.h, *.c, maps, textures|
+|External functs|* open, close, read, write, malloc, free, perror, strerror, exit <br> * All functions of the math library (-lm compiler option, man man 3 math) <br> * All functions of the MiniLibX <br> * ft_printf and any equivalent YOU coded|
+
 ## todo list
 - [ ] MiniLibX 사용법 알아보기
 - [ ] MiniLibX 내장 함수 알아보기
