@@ -31,8 +31,8 @@ int main(void)
 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
 	
 	int cnt = 0;
-	//mlx_key_hook(vars.win, &key_hook, &cnt);
-	mlx_hook(vars.win, 2, 1L<<0, close, &vars);//KEY를 누르면 꺼짐.
+	mlx_key_hook(vars.win, &key_hook, &cnt);
+	//mlx_hook(vars.win, 2, 1L<<0, close, &vars);//KEY를 누르면 꺼짐.
 	mlx_loop(vars.mlx);
 }
 
