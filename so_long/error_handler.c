@@ -146,12 +146,8 @@ int	read_map(char *file_name, t_game *game)
 		if (idx == 0)
 			set_game(game, line);
 		//하나로 합칠 수 있으면 합치기
-		if (game->width != ft_strlen_without_new_line(line))
-		{
-			ft_free(game, line);
-			return (ERROR_TAG);
-		}
-		if (!is_line_valid(line, idx))
+		if (game->width != ft_strlen_without_new_line(line)
+			|| !is_line_valid(line, idx))
 		{
 			ft_free(game, line);
 			return (ERROR_TAG);
@@ -197,18 +193,7 @@ int main()
 		system("leaks a.out");
 		return (0);
 	}
-	//printf("%d", read_flag);
-	// printf("check:\n%s",game->map_str);
-	// if (read_flag == ERROR_TAG)
-	// 	return (0);
-	// map = ft_split(game->map_str, '\n');
-	// printf("\ncheck\n");
-	// while (*map)
-	// {
-	// 	printf("%s\n", *map);
-	// 	map++;
-	// }
-
+	
 	system("leaks a.out");
 	return (0);
 }
