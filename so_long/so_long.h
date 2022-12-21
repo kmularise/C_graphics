@@ -9,6 +9,9 @@ typedef struct s_game
 	int		height;
 	int		width;
 	char	*map_str;
+	void	*mlx;
+	void	*win;
+	void	*img;
 }	t_game;
 
 typedef struct s_position
@@ -28,5 +31,6 @@ char	**ft_split(char *s, char c);
 # define ERROR_TAG -1
 # define SUCCESS_TAG 0
 # define ERROR_MESSAGE "Error\n"
+# define UNIT_PIXEL 64
 
 #endif

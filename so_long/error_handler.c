@@ -84,7 +84,7 @@ int	is_line_valid(char *line, int idx)
 
 void	set_game(t_game *game, char* line)//초반부분이나  시작 부분에서 유효한지 체크해주어야 함.
 {
-	game->height = 0;
+	game->height = 1;
 	game->width = ft_strlen_without_new_line(line);
 	game->map_str = NULL;
 }
@@ -161,6 +161,7 @@ int	read_map(char *file_name, t_game *game)
 		}
 		free(line);
 		idx++;
+		(game->height)++;
 	}
 	if (!is_map_component_valid(game->map_str))
 	{
@@ -179,6 +180,9 @@ int	read_map(char *file_name, t_game *game)
 
 // }
 
+#include "put_image2.c"
+
+
 int main()
 {
 	t_game *game;
@@ -186,14 +190,29 @@ int main()
 	int read_flag;
 
 	game = malloc(sizeof(t_game));
-	read_flag = read_map("example1.txt", game);
+	read_flag = read_map("example2.txt", game);
 	if (read_flag == ERROR_TAG)
 	{
 		printf("Error\n");
 		system("leaks a.out");
 		return (0);
 	}
-	
+	printf("\n check: %d\n", game->height);
+	map = ft_split(game->map_str, '\n');
+	int i = 0;
+	while (map[i])
+	{
+		printf("%s\n", map[i]);
+		i++;
+	}
+
+	init_window(game);
+	put_background_image(game);
+	put_background_image2(game);
+
+	//put_component_image(game);
+	mlx_loop(game->mlx);
 	system("leaks a.out");
+
 	return (0);
 }
