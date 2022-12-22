@@ -4,6 +4,13 @@
 # include "mlx.h"
 # include "get_next_line.h"
 
+typedef struct s_board
+{
+	int		width;
+	int		height;
+	char	**map;
+} t_board;
+
 typedef struct s_game
 {
 	int		height;
@@ -24,6 +31,10 @@ typedef struct s_position
 }	t_position;
 
 char	**ft_split(char *s, char c);
+
+# define KEY_PRESS 2
+# define BUTTON_PRESS 4
+# define KEY_EXIT 17
 
 # define KEY_ESC 53
 # define KEY_W 13

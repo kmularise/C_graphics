@@ -49,7 +49,8 @@
 * map의 구성요소
     * 벽, 수집품, 빈공간
     * 0 : 빈공간 1 : 벽 C : 수집품 E : map 탈출구 P : 플레이어 시작 지점
-* ex)
+### Error Handler
+* 에러 메시지 : 'Error\n' + explicit error message
 ```
 1111111111111
 10010000000C1
@@ -76,3 +77,19 @@
     * 핀터레스트(Pinterest) : top down game 이런 식으로 검색
 * xpm 파일에서 exit, collective 구성요소의 배경색을 없애는 방법
     * 배경색의 trgb대신 None을 넣는다.
+* x_event, x_mask 파라미터로 이벤트 상황을 지정해준다.
+    * miniLibX의 mlx_hook() 함수에서는 파라미터로 x_mask를 받지만 내부에서 사용을 하지 않으므로 0으로 값을 지정해도 무관하다.
+* 바탕화면에서 빨간색 버튼을 누르면 종료되는 x_event는 17이다.
+<img width="391" alt="image" src="https://user-images.githubusercontent.com/106499310/209092790-79b2f18c-5e54-47ae-877e-7484796ad1c4.png">
+
+```c
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
+```

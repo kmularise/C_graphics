@@ -35,10 +35,10 @@ int do_event(int keycode, t_vars *vars)//ESC : 53
 }
 
 
-int	mouse_hook(int mousecode)
+int	key_hook(int keycode, int *p_cnt)
 {
-	printf("key_hook...%d\n", mousecode);
-	exit(0);	
+	printf("key_hook...%d\n", keycode);
+	*p_cnt +=1;
 	return (0);
 }
 
@@ -51,11 +51,9 @@ int main(void)
 	vars.win = mlx_new_window(vars.mlx, 1920, 1080, "Hello world!");
 	
 	// int cnt = 0;
-	//mlx_key_hook(vars.win, &key_hook, &cnt);
+	// mlx_key_hook(vars.win, &key_hook, &cnt);
 	mlx_hook(vars.win, KEY_PRESS, 1L<<0, do_event, &vars);//KEY를 누르면 꺼짐.
-	mlx_hook(vars.win, 17, 1L<<2, mouse_hook, &vars);
-
-	//mlx_loop_hook
+	// mlx_hook(vars.win, )
 	mlx_loop(vars.mlx);
 }
 
