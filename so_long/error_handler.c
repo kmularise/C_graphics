@@ -86,18 +86,15 @@ void	set_game(t_game *game, char* line)//초반부분이나  시작 부분에서
 {
 	game->height = 1;
 	game->width = ft_strlen_without_new_line(line);
-	game->map_str = NULL;
 }
 
-void	ft_free(t_game *game, char *line)
+void	ft_free(char *ptr1, char *ptr2)
 {
-	if (line)
-		free(line);
-	if (game)
-	{
-		free(game->map_str);
-		free(game);
-	}
+	if (ptr1)
+		free(ptr1);
+	if (ptr2)
+		free(ptr2);
+
 }
 
 int	is_map_component_valid(char *map_str)
@@ -132,6 +129,7 @@ int	read_map(char *file_name, t_game *game)
 	char	*line;
 	int		line_len;
 	int		idx;
+	char	*map_str;
 
 	fd = open(file_name, O_RDONLY);
 	idx = 0;
@@ -140,7 +138,7 @@ int	read_map(char *file_name, t_game *game)
 		line = get_next_line(fd);
 		if (!line)
 		{
-			ft_free(game, line);
+			ft_free(line, map_str);
 			return (ERROR_TAG);
 		}
 		if (idx == 0)
@@ -149,11 +147,11 @@ int	read_map(char *file_name, t_game *game)
 		if (game->width != ft_strlen_without_new_line(line)
 			|| !is_line_valid(line, idx))
 		{
-			ft_free(game, line);
+			ft_free(line, map_str);
 			return (ERROR_TAG);
 		}
 		//에러 나는 것들 하나로 합칠 수 있는 거 합치기
-		game->map_str = ft_strjoin(game->map_str, line);
+		map_str = ft_strjoin(map_str, line);
 		if (is_end_of_file(line))
 		{
 			free(line);
@@ -163,11 +161,13 @@ int	read_map(char *file_name, t_game *game)
 		idx++;
 		(game->height)++;
 	}
-	if (!is_map_component_valid(game->map_str))
+	if (!is_map_component_valid(map_str))
 	{
-		ft_free(game, NULL);
+		ft_free(map_str, NULL);
 		return (ERROR_TAG);
 	}
+	printf("%s", map_str);
+	game->map = ft_split(map_str, '\n');
 	//printf("%s", game->map_str);
 	close(fd);
 	return (SUCCESS_TAG);
@@ -180,8 +180,8 @@ int	read_map(char *file_name, t_game *game)
 
 // }
 
-#include "put_image2.c"
-
+//#include "put_image2.c"
+#include "error_handler2.c"
 
 int main()
 {
@@ -190,29 +190,28 @@ int main()
 	int read_flag;
 
 	game = malloc(sizeof(t_game));
-	read_flag = read_map("example2.txt", game);
+	read_flag = read_map("example3.txt", game);
 	if (read_flag == ERROR_TAG)
 	{
 		printf("Error\n");
 		system("leaks a.out");
 		return (0);
 	}
-	printf("\n check: %d\n", game->height);
-	map = ft_split(game->map_str, '\n');
-	int i = 0;
-	while (map[i])
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
+	//printf("\n check: %d\n", game->height);
+	// int i = 0;
+	// while ((game->map)[i])
+	// {
+	// 	printf("%s\n", (game->map)[i]);
+	// 	i++;
+	// }
+	printf("%d",is_map_connected(game));
+	// init_window(game);
+	// put_background_image(game);
+	// put_background_image2(game);
 
-	init_window(game);
-	put_background_image(game);
-	put_background_image2(game);
-
-	//put_component_image(game);
-	mlx_loop(game->mlx);
-	system("leaks a.out");
+	// //put_component_image(game);
+	// mlx_loop(game->mlx);
+	// system("leaks a.out");
 
 	return (0);
 }

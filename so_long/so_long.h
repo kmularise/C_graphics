@@ -8,16 +8,19 @@ typedef struct s_game
 {
 	int		height;
 	int		width;
-	char	*map_str;
+	char	**map;
 	void	*mlx;
 	void	*win;
 	void	*img;
+	int		c_count;
+	int		e_count;
 }	t_game;
 
 typedef struct s_position
 {
 	int	y;
 	int	x;
+	int c_count;
 }	t_position;
 
 char	**ft_split(char *s, char c);
