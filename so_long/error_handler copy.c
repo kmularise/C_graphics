@@ -44,17 +44,6 @@ int ft_get_height(char **map)//utils애 가야하는 부분
 	return (i);
 }
 
-t_board	*init_board(char **map)
-{
-	t_board	*board;
-
-	board = malloc(sizeof(t_board));
-	board->width = ft_strlen(map[0]);
-	board->height = ft_get_height(map);
-	board->map = map;
-	return (board);
-}
-
 int is_map_valid_width(char **map)
 {
 	int	i;
@@ -143,6 +132,61 @@ int is_map_component_valid(char **map)
 	return (1);
 }
 
+t_info	*init_info(char **map)
+{
+	t_info	*info;
+	info = malloc(sizeof(t_info));
+
+	info->total_c_count = 0;
+	info->total_e_count = 0;
+	info->total_p_count = 0;
+	info->map = map;
+	info->width = ft_strlen(map[0]);
+	info->height = ft_get_height(map);
+	return (info);
+}
+
+t_info	*get_map_component_count(char **map)
+{
+	t_info	*board;
+	int		y;
+	int		x;
+
+	y = 0;
+	board = init_info(map);
+
+	y = -1;
+	while (map[++y])
+	{
+		x = -1;
+		while (map[y][++x])
+		{
+			if (map[y][x] == 'C')
+				board->total_c_count++;
+			if (map[y][x] == 'E')
+				board->total_e_count++;
+			if (map[y][x] == 'P')
+			{
+				board->y = y;
+				board->x = x;
+				board->total_p_count++;
+			}
+		}
+	}
+	return (board);
+}
+
+int is_component_count_valid(t_info *board)
+{
+	if (board->total_c_count == 0)
+		return (0);
+	if (board->total_e_count == 0)
+		return (0);
+	if (board->total_p_count != 1)
+		return (0);
+	return (1);
+}
+
 void check_map_valid(char **map)
 {
 	if (!is_map_valid_width(map) ||
@@ -153,12 +197,25 @@ void check_map_valid(char **map)
 		}
 }
 
+void check_component_count_valid(t_info *board)
+{
+	if (!is_component_count_valid(board))
+	{
+		//대충 종료시키는 함수
+		exit(0);
+	}
+}
+
 //에러 처리
+
 #include <stdio.h>
 int main ()
 {
 	char **map =read_map("example.txt");
-	t_board *board = init_board(map);
+	check_map_valid(map);
+	t_info *board = get_map_component_count(map);
+	check_component_count_valid(board);
+
 	int i = 0;
 	while (map[i])
 	{

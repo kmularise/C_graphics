@@ -4,12 +4,24 @@
 # include "mlx.h"
 # include "get_next_line.h"
 
-typedef struct s_board
+// typedef struct s_board
+// {
+// 	int		width;
+// 	int		height;
+// 	char	**map;
+// } t_board;
+
+typedef struct s_info
 {
-	int		width;
-	int		height;
-	char	**map;
-} t_board;
+	int	y;
+	int	x;
+	int	total_c_count;
+	int	total_e_count;
+	int	total_p_count;
+	int	width;
+	int height;
+	char	**map; 
+}	t_info;
 
 typedef struct s_game
 {
