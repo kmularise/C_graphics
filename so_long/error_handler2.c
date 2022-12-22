@@ -28,7 +28,7 @@ t_position	*get_player_info(t_game *game)
 	return (pos);
 }
 
-char	**make_2din_zero(int height, int width)
+char	**make_2dim_zero(int height, int width)
 {
 	char	**result;
 	char	temp;
@@ -76,16 +76,41 @@ int	dfs(int x, int y, t_game *game, char **visited)
 	return (0);
 }
 
-int is_map_connected(t_game *game)
+void ft_free_d_ptr(char **double_ptr)
 {
-	t_position	*player_pos;
+	int	i;
+
+	i = 0;
+	while (double_ptr[i])
+	{
+		free(double_ptr[i]);
+		i++;
+	}
+	free(double_ptr);
+}
+
+void	ft_free_game(t_game *game)
+{
+	if (game->mlx)
+		free(game->mlx);
+	if (game->win)
+		free(game->win);
+	if (game->img)
+		free(game->img);
+	if (game->map)
+		ft_free_d_ptr(game->map);
+}
+
+int	is_map_connected(t_game *game, t_position *player_pos)
+{
 	char		**visited;
 
-	player_pos = get_player_info(game);
-	visited = make_2din_zero(game->height, game->width);
+	//player_pos = get_player_info(game);
+	visited = make_2dim_zero(game->height, game->width);
 	game->e_count = 0;
 	game->c_count = 0;
 	dfs(player_pos->x, player_pos->y, game, visited);
+	ft_free_d_ptr(visited);
 	if (player_pos->c_count != game->c_count)
 		return (0);
 	if (game->e_count == 0)

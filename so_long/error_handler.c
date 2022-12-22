@@ -86,6 +86,10 @@ void	set_game(t_game *game, char* line)//초반부분이나  시작 부분에서
 {
 	game->height = 1;
 	game->width = ft_strlen_without_new_line(line);
+	game->mlx = NULL;
+	game->map = NULL;
+	game->win = NULL;
+	game->img = NULL;
 }
 
 void	ft_free(char *ptr1, char *ptr2)
@@ -169,6 +173,7 @@ int	read_map(char *file_name, t_game *game)
 	printf("%s", map_str);
 	game->map = ft_split(map_str, '\n');
 	//printf("%s", game->map_str);
+	free(map_str);
 	close(fd);
 	return (SUCCESS_TAG);
 }
@@ -180,38 +185,41 @@ int	read_map(char *file_name, t_game *game)
 
 // }
 
-//#include "put_image2.c"
+#include "put_image2.c"
 #include "error_handler2.c"
 
 int main()
 {
 	t_game *game;
+	t_position	*player_pos;
 	char **map;
 	int read_flag;
 
 	game = malloc(sizeof(t_game));
-	read_flag = read_map("example3.txt", game);
+	read_flag = read_map("example2.txt", game);
 	if (read_flag == ERROR_TAG)
 	{
 		printf("Error\n");
-		system("leaks a.out");
 		return (0);
 	}
-	//printf("\n check: %d\n", game->height);
-	// int i = 0;
-	// while ((game->map)[i])
-	// {
-	// 	printf("%s\n", (game->map)[i]);
-	// 	i++;
-	// }
-	printf("%d",is_map_connected(game));
-	// init_window(game);
-	// put_background_image(game);
-	// put_background_image2(game);
-
+	player_pos = get_player_info(game);
+	if (!is_map_connected(game, player_pos))
+	{
+		printf("Error\n");
+		return (0);
+	}
+	printf("%d",is_map_connected(game, player_pos));
+	init_window(game);
+	put_background_image(game);
+	put_component_image(game);
+	game->map[4][2] = 'P';
+	game->map[4][1] = '0';
+	put_background_image(game);
+	put_component_image(game);
 	// //put_component_image(game);
-	// mlx_loop(game->mlx);
+	mlx_loop(game->mlx);
 	// system("leaks a.out");
+	system("leaks a.out");
 
 	return (0);
 }
