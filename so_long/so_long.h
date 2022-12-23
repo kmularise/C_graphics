@@ -44,6 +44,7 @@ void show_error(char *error_message);
 char	**read_map(char *file_name);
 void	start(t_game *game);
 
+
 # define KEY_PRESS 2
 # define BUTTON_PRESS 4
 # define KEY_EXIT 17
