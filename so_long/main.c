@@ -1,43 +1,42 @@
-#include <mlx.h>
-#include <math.h>
+#include "so_long.h"
 
-typedef struct s_data {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
-}	t_data;
+// #include "error_handler_sub.c"
+// #include "error_handler.c"
+// #include "error_handler_sub2.c"
+// #include "error_handler_utils.c"
+// #include "get_next_line.c"
+// #include "get_next_line_utils.c"
+// #include "ft_split.c"
+// #include "game.c"
+// #include "game_utils.c"
+// #include "event_handler.c"
+// #include "event_handler2.c"
+// #include "ft_printf.c"
+// # include "ft_printf_type_1.c"
+// # include "ft_printf_type_2.c"
+// # include "ft_printf_utils.c"
 
-void my_mlx_pixel_put(t_data *data, int x, int y, int color)
+void show_error(char *error_message)
 {
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
+	ft_printf("Error\n");
+	ft_printf("%s\n", error_message);
+	exit(0);
 }
 
-int main(void)
+int main (int argc, char *argv[])
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, 1920, 1080, "euijin");
-	img.img = mlx_new_image(mlx, 1920, 1080);
-
-	int m_x = 500;
-	int m_y = 500;
-	int rad = 100;
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	for (int y = - rad ; y < rad ; y++)
-	{
-		for (int x = -(int)sqrt(rad*rad - y * y); x < (int)sqrt(rad*rad - y*y); x++)
-		{
-			my_mlx_pixel_put(&img, y + m_y, x + m_x, 0x00FFFFFF);
-		}
-	}
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
+	if (argc != 2)
+		show_error("invalid input parameter count!");
+	char **map =read_map(argv[1]);
+	if (!map)
+		show_error("invalid file or empty file!");
+	check_map_valid(map);
+	t_info *board = get_map_component_count(map);
+	check_component_count_valid(board);
+	t_info *player = set_player(board);
+	check_map_connected(player, board);
+	t_game *game = set_game(player);
+	game->mlx = mlx_init();
+	start(game);
+	system("leaks a.out");
 }
