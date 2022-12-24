@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   game_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuikim <yuikim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/24 15:14:52 by yuikim            #+#    #+#             */
+/*   Updated: 2022/12/24 15:26:59 by yuikim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 char	*get_xpm_path(char component)
@@ -15,10 +27,10 @@ char	*get_xpm_path(char component)
 
 char	**read_map(char *file_name)
 {
-	int	fd;
-	char *line;
-	char *map_str;
-	char **answer;
+	int		fd;
+	char	*line;
+	char	*map_str;
+	char	**answer;
 
 	map_str = NULL;
 	fd = open(file_name, O_RDONLY);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handler.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuikim <yuikim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/24 15:06:55 by yuikim            #+#    #+#             */
+/*   Updated: 2022/12/24 15:07:21 by yuikim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 t_info	*get_map_component_count(char **map)
@@ -28,13 +40,13 @@ t_info	*get_map_component_count(char **map)
 	return (board);
 }
 
-void check_component_count_valid(t_info *board)
+void	check_component_count_valid(t_info *board)
 {
 	if (!is_component_count_valid(board))
 		show_error("count is not valid");
 }
 
-void check_map_valid(char **map)
+void	check_map_valid(char **map)
 {
 	if (!is_map_valid_width(map))
 		show_error("width is not valid");
@@ -42,7 +54,7 @@ void check_map_valid(char **map)
 		show_error("component is not valid");
 }
 
-void check_map_connected(t_info *player, t_info *board)
+void	check_map_connected(t_info *player, t_info *board)
 {
 	if (!is_map_connected(player, board))
 		show_error("You can't get all collectives!");

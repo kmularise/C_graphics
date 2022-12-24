@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handler_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuikim <yuikim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/24 15:06:28 by yuikim            #+#    #+#             */
+/*   Updated: 2022/12/24 15:06:46 by yuikim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-int ft_get_height(char **map)//utils애 가야하는 부분
+int	ft_get_height(char **map)
 {
 	int	i;
 
@@ -27,8 +39,8 @@ int	is_in_set(char factor, const char *set)
 t_info	*init_info(char **map)
 {
 	t_info	*info;
-	info = malloc(sizeof(t_info));
 
+	info = malloc(sizeof(t_info));
 	info->total_c_count = 0;
 	info->total_e_count = 0;
 	info->total_p_count = 0;
@@ -64,7 +76,7 @@ char	**make_2dim_zero(int height, int width)
 	return (result);
 }
 
-void ft_free_d_ptr(char **double_ptr)
+void	ft_free_d_ptr(char **double_ptr)
 {
 	int	i;
 

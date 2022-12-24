@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handler_sub2.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuikim <yuikim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/24 15:05:45 by yuikim            #+#    #+#             */
+/*   Updated: 2022/12/24 15:05:53 by yuikim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
 t_info	*set_player(t_info *board)
 {
-	t_info *player;
+	t_info	*player;
 
 	player = init_info(board->map);
 	player->x = board->x;

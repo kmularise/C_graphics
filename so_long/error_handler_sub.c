@@ -1,10 +1,21 @@
-#include "so_long.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_handler_sub.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuikim <yuikim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/24 15:02:00 by yuikim            #+#    #+#             */
+/*   Updated: 2022/12/24 15:25:28 by yuikim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "so_long.h"
 
 int	is_line_all_wall(char *line)
 {
-	const char wall = '1';
-	int i;
+	const char	wall = '1';
+	int			i;
 
 	i = 0;
 	while (line[i])
@@ -16,7 +27,7 @@ int	is_line_all_wall(char *line)
 	return (1);
 }
 
-int is_line_component_valid(char *line)
+int	is_line_component_valid(char *line)
 {
 	const char	*set = "01CEP";
 	const char	wall = '1';
@@ -27,7 +38,7 @@ int is_line_component_valid(char *line)
 		return (0);
 	while (line[idx] && line[idx + 1] != 0)
 	{
-		if (!is_in_set(line[idx],set))
+		if (!is_in_set(line[idx], set))
 			return (0);
 		idx++;
 	}
@@ -39,7 +50,7 @@ int is_line_component_valid(char *line)
 int	is_map_valid_width(char **map)
 {
 	int	i;
-	int len;
+	int	len;
 
 	len = ft_strlen(map[0]);
 	i = 1;
@@ -54,10 +65,10 @@ int	is_map_valid_width(char **map)
 	return (1);
 }
 
-int is_map_component_valid(char **map)
+int	is_map_component_valid(char **map)
 {
-	int	i;
-	const int height = ft_get_height(map);
+	int			i;
+	const int	height = ft_get_height(map);
 
 	i = 0;
 	while (i < height)
@@ -77,7 +88,7 @@ int is_map_component_valid(char **map)
 	return (1);
 }
 
-int is_component_count_valid(t_info *board)
+int	is_component_count_valid(t_info *board)
 {
 	if (board->total_c_count == 0)
 		return (0);

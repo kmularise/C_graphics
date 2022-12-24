@@ -1,19 +1,27 @@
-#include "so_long.h"
-//event handle 할 때는 구조체 한개에 담는 것이 좋음
-// 처리하기
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event_handler.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yuikim <yuikim@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/12/24 15:11:56 by yuikim            #+#    #+#             */
+/*   Updated: 2022/12/24 15:11:57 by yuikim           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int exit_hook(void)
+#include "so_long.h"
+
+int	exit_hook(void)
 {
 	ft_printf("click red cross.. program exit");
 	exit(0);
 	return (0);
 }
 
-int program_exit(t_game *game)
+int	program_exit(t_game *game)
 {
-	//printf("click red cross.. program exit");
 	mlx_destroy_window(game->mlx, game->win);
-	//printf("click red cross.. program exit");
 	exit(0);
 	return (0);
 }
@@ -32,12 +40,11 @@ int	key_press(int keycode, t_game *game)
 		return (check_valid_move(game->p_y, game->p_x - 1, game, KEY_A));
 	ft_printf("please press valid key\n");
 	return (0);
-	
 }
 
 int	event_handle(t_game *game)
 {
 	mlx_hook(game->win, KEY_PRESS, 0, key_press, game);
-	mlx_hook(game->win, KEY_EXIT, 0, exit_hook,game);
+	mlx_hook(game->win, KEY_EXIT, 0, exit_hook, game);
 	return (0);
 }
