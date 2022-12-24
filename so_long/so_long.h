@@ -6,7 +6,7 @@
 /*   By: yuikim <yuikim@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 15:27:28 by yuikim            #+#    #+#             */
-/*   Updated: 2022/12/24 15:48:08 by yuikim           ###   ########.fr       */
+/*   Updated: 2022/12/24 16:19:32 by yuikim           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ char	*get_image_path(int keycode);
 void	show_error(char *error_message);
 char	**read_map(char *file_name);
 void	start(t_game *game);
-int		has_right_ext(char *filename);
 
 # define KEY_PRESS 2
 # define BUTTON_PRESS 4
