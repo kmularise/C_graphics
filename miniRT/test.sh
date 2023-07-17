@@ -1,0 +1,1 @@
+gcc -lmlx -framework OpenGl -framework AppKit -Imlx library.c
