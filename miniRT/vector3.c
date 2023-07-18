@@ -8,9 +8,3 @@ t_vector    cross_product(t_vector vector1, t_vector vector2) {
     vector.z = vector1.x * vector2.y - vector1.y * vector2.x;
     return vector;
 }
-
-t_vector unit(t_vector vector) {
-
-}
-
-

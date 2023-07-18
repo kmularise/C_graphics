@@ -16,14 +16,21 @@ t_vector    set_vector(t_vector *vector, double x, double y, double z)
     vector->z = z;
 }
 
-double    square_of_len(t_vector vector) {
-    return (vector.x * vector.x + vector.y + vector.y + vector.z + vector.z);
+double    inner_product(t_vector vector1, t_vector vector2) {
+    return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z + vector2.z;
 }
 
 double  len(t_vector vector) {
-    return sqrt(square_of_len(vector));
+    return sqrt(inner_product(vector, vector));
 }
 
-double    inner_product(t_vector vector1, t_vector vector2) {
-    return vector1.x * vector2.x + vector1.y * vector2.y + vector1.z + vector2.z;
+t_vector unit(t_vector vector) {
+    double length = len(vector);
+    if (length == 0) {
+        printf("Error\n:Devider is 0"); //나중에 수정하기
+        exit(0);
+    }
+    vector.x /= length;
+    vector.y /= length;
+    vector.z /= length;
 }
